@@ -8,12 +8,15 @@
 @import "vendor/bootstrap/custom";
 @import "node_modules/bootstrap/scss/bootstrap";
 
-// Import scss variables and mixins
+// import scss variables and mixins
 @import 'abstracts/variables/typography';
 @import 'abstracts/variables/general';
 @import 'abstracts/mixins/mixins';
 
-// Import base styling
+// import base styling
 @import 'base/reset';
 @import 'base/print';
 @import 'base/general';
+
+// import component styling
+@import 'components/button';

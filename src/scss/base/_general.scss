@@ -14,6 +14,11 @@ body {
     align-items: center;
     height: 100vh;
     width: 100vw;
+    text-align: center;
+
+    .btn-wrapper {
+        width: 200px;
+    }
 }
 
 h1,
@@ -59,19 +64,16 @@ a {
     }
 }
 
-.btn-primary {
-    &:hover {
-        background-color: $color-secondary;
-        border-color: $color-secondary;
-    }
-}
-
 img {
     max-width: 100%;
     height: auto;
 }
 
 @include media-breakpoint-up(lg) {
+    body {
+        font-size: $font-size-normal;
+    }
+
     h1 {
         font-size: $font-size-h1;
     }
