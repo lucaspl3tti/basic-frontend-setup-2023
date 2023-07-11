@@ -1,24 +1,24 @@
 /** general styling */
 body {
-    margin: 0;
-    background-color: $color-body;
-    font-family: $font-body;
-    font-size: $font-size-normal-mobile;
-    color: $color-text;
+  margin: 0;
+  background-color: $color-body;
+  font-family: $font-body;
+  font-size: $font-size-normal-mobile;
+  color: $color-text;
 }
 
 #app {
-    display: flex;
-    flex-flow: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    text-align: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  text-align: center;
 
-    .btn-wrapper {
-        width: 200px;
-    }
+  .btn-wrapper {
+    width: 200px;
+  }
 }
 
 h1,
@@ -26,71 +26,71 @@ h2,
 h3,
 h4,
 h5 {
-    color: $color-text;
-    font-weight: $font-weight-bold;
+  color: $color-text;
+  font-weight: $font-weight-bold;
 }
 
 h1 {
-    font-size: $font-size-h1-mobile;
+  font-size: $font-size-h1-mobile;
 }
 
 h2 {
-    font-size: $font-size-h2-mobile;
+  font-size: $font-size-h2-mobile;
 }
 
 h3 {
-    font-size: $font-size-h3-mobile;
+  font-size: $font-size-h3-mobile;
 }
 
 h4 {
-    font-size: $font-size-h4-mobile;
+  font-size: $font-size-h4-mobile;
 }
 
 h5 {
-    font-size: $font-size-h5-mobile;
+  font-size: $font-size-h5-mobile;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 a {
-    color: $color-primary;
-    text-decoration: none;
+  color: $color-primary;
+  text-decoration: none;
 
-    &:hover {
-        color: $color-secondary;
-        text-decoration: none;
-    }
+  &:hover {
+    color: $color-secondary;
+    text-decoration: none;
+  }
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 @include tablet-portrait-up {
-    body {
-        font-size: $font-size-normal;
-    }
+  body {
+    font-size: $font-size-normal;
+  }
 
-    h1 {
-        font-size: $font-size-h1;
-    }
+  h1 {
+    font-size: $font-size-h1;
+  }
 
-    h2 {
-        font-size: $font-size-h2;
-    }
+  h2 {
+    font-size: $font-size-h2;
+  }
 
-    h3 {
-        font-size: $font-size-h3;
-    }
+  h3 {
+    font-size: $font-size-h3;
+  }
 
-    h4 {
-        font-size: $font-size-h4;
-    }
+  h4 {
+    font-size: $font-size-h4;
+  }
 
-    h5 {
-        font-size: $font-size-h5;
-    }
+  h5 {
+    font-size: $font-size-h5;
+  }
 }
