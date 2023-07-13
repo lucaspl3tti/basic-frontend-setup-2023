@@ -35,7 +35,12 @@ module.exports = {
     'nonblock-statement-body-position': 0,
     'no-restricted-syntax': 0,
     'guard-for-in': 0,
-    'class-methods-use-this': 0
+    'class-methods-use-this': 0,
+    'comma-dangle': 0,
+    'no-param-reassign': 0,
+    'consistent-return': 0,
+    'no-plusplus': 0,
+    'prefer-destructuring': 0,
   },
   ignorePatterns: [
     '**/node_modules/*.js',

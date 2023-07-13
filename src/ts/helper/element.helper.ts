@@ -2,7 +2,7 @@ import {
   isIdSelector,
   isClassSelector,
   removeTrailingHashSign,
-  removeTrailingDot
+  removeTrailingDot,
 } from './class.helper.ts'
 
 // define error messages
@@ -18,11 +18,11 @@ const errorMessages = {
   },
   findParent: {
     elementIsNull: 'Child element could not be found',
-    selectorNotValid: 'The given selector is not valid, please check if it is an id or class selector'
+    selectorNotValid: 'The given selector is not valid, please check if it is an id or class selector', // eslint-disable-line
   },
   getParent: {
-    elementIsNull: 'Child element in getParent could not be found'
-  }
+    elementIsNull: 'Child element in getParent could not be found',
+  },
 }
 
 // Helper function to create a new element in the dom
@@ -43,7 +43,7 @@ export function createElement(
 export function hideElement(
   element: HTMLElement | null,
   hiddenClass = ''
-): any {
+) {
   if (element === null) throw new Error(errorMessages.hideElement.elementIsNull)
   if (hiddenClass === '') return element.style.display === 'none'
 
@@ -55,14 +55,17 @@ export function showElement(
   element: HTMLElement | null,
   showClass = '',
   displayStyle = 'block'
-): any {
+) {
   if (element === null) throw new Error(errorMessages.showElement.elementIsNull)
   if (showClass === '') return element.style.display === displayStyle
 
   element.classList.add(showClass)
 }
 
-// Helper function to find parent of an element by a given selector (either id or class)
+/**
+ * Helper function to find parent of an element by a given selector
+ * (either id or class)
+ */
 export function findParent(
   childElement: Element | null,
   searchedSelector: string,
@@ -73,7 +76,7 @@ export function findParent(
     errorMessages.findParent.elementIsNull
   )
 
-  if (iterationLimit <= currentIterationCount++) return null
+  if (iterationLimit <= ++currentIterationCount) return null
 
   const parentElement = childElement.parentElement
   let isSearchedElement: boolean|undefined = false
@@ -99,7 +102,10 @@ export function findParent(
   )
 }
 
-// Helper function to get a parent by going up in the document by a given number of iterations
+/**
+ * Helper function to get a parent by going up in the document by a
+ * given number of iterations
+ */
 export function getParent(
   childElement: Element | null,
   iterationLimit = 5,
@@ -109,7 +115,7 @@ export function getParent(
     errorMessages.getParent.elementIsNull
   )
 
-  if (iterationLimit <= currentIterationCount++) return null
+  if (iterationLimit <= ++currentIterationCount) return null
 
   const parentElement = childElement.parentElement
   if (currentIterationCount === iterationLimit) return parentElement

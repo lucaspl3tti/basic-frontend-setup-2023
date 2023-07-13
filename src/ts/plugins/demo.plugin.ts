@@ -1,5 +1,5 @@
 import Plugin from '../plugin-system/plugin.class.ts'
-import { formatDate } from '../helper/date.helper.ts'
+import formatDate from '../helper/date.helper.ts'
 import { createElement, findParent, getParent } from '../helper/element.helper.ts'
 
 /**
