@@ -2,17 +2,17 @@ name: test-code-quality
 on: pull_request
 jobs:
   install-dependencies:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
     name: Install dependencies  
     steps:
       - run: npm i
   test-js:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
     name: Test JavaScript code quality  
     steps:
       - run: npm run lint:js
   test-scss:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
     name: Test SCSS code quality  
     steps:
       - run: npm run lint:scss
