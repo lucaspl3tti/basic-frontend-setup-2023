@@ -15,7 +15,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'eslint-config-airbnb',
+    // 'eslint-config-airbnb',
   ],
   rules: {
     'max-len': ['error', {'code': 80}],
