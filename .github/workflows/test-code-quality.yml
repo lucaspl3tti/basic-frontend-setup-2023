@@ -2,7 +2,7 @@ name: test-code-quality
 on: pull_request
 jobs:
   install-dependencies:
-    runs-on: self-hosted
+    runs-on: ubuntu:latest
     name: Install dependencies  
     steps:
       - run: npm i
