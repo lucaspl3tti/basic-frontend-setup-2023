@@ -15,7 +15,7 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
-    'eslint-config-airbnb',
+    // 'eslint-config-airbnb',
   ],
   rules: {
     'max-len': ['error', {'code': 80}],
@@ -35,7 +35,12 @@ module.exports = {
     'nonblock-statement-body-position': 0,
     'no-restricted-syntax': 0,
     'guard-for-in': 0,
-    'class-methods-use-this': 0
+    'class-methods-use-this': 0,
+    'comma-dangle': 0,
+    'no-param-reassign': 0,
+    'consistent-return': 0,
+    'no-plusplus': 0,
+    'prefer-destructuring': 0,
   },
   ignorePatterns: [
     '**/node_modules/*.js',

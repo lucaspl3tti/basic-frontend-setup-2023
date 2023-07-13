@@ -16,7 +16,8 @@
     "typescript",
     "sass",
     "scss",
-    "html5"
+    "html5",
+    "vite"
   ],
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.7",
