@@ -115,10 +115,9 @@ export function getParent(
     errorMessages.getParent.elementIsNull
   )
 
-  if (iterationLimit <= ++currentIterationCount) return null
-
   const parentElement = childElement.parentElement
-  if (currentIterationCount === iterationLimit) return parentElement
+  if (currentIterationCount === iterationLimit - 1) return parentElement
+  ++currentIterationCount
 
   return getParent(
     parentElement,
