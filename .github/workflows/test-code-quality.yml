@@ -3,16 +3,16 @@ on: pull_request
 jobs:
   install-dependencies:
     runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
-    name: Install dependencies  
+    strategy:
+      matrix:
+        node: [ 14, 16, 18 ]
+    name: Test code quality
     steps:
-      - run: npm i
-  test-js:
-    runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
-    name: Test JavaScript code quality  
-    steps:
+      - uses: actions/checkout@v3
+      - name: Run linting rules and tests
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.2
+      - run: npm ci
       - run: npm run lint:js
-  test-scss:
-    runs-on: ${{ fromJSON('["ubuntu-latest", "self-hosted"]')[github.repository == 'github/docs-internal'] }}
-    name: Test SCSS code quality  
-    steps:
       - run: npm run lint:scss
