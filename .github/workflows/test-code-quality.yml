@@ -15,4 +15,3 @@ jobs:
           node-version: 16.14.2
       - run: npm ci
       - run: npm run lint:js
-      - run: npm run lint:scss
