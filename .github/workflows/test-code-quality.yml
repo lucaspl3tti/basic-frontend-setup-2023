@@ -2,17 +2,17 @@ name: test-code-quality
 on: pull_request
 jobs:
   install-dependencies:
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
     name: Install dependencies  
     steps:
       - run: npm i
   test-js:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Test JavaScript code quality  
     steps:
       - run: npm run lint:js
   test-scss:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     name: Test SCSS code quality  
     steps:
       - run: npm run lint:scss
