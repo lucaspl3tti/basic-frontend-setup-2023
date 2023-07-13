@@ -16,22 +16,24 @@ export default class DemoPlugin extends Plugin {
     super.initPlugin(htmlElement)
 
     console.log(this.el) // eslint-disable-line
-    this.thisIsATest()
+    // this.thisIsATest()
 
     return true
   }
 
   thisIsATest() {
-    const parentTestText = this.el.querySelector('.parent-demo-text')
-    console.log(parentTestText)
+    const childTestText = this.el.querySelector('.parent-demo-text')
 
-    const parent = findParent(parentTestText, 'parent', 6);
-    console.log(parent)
+    if (childTestText !== null) {
+      const timestamp = childTestText.textContent || '2023-07-13'
+      childTestText.textContent = formatDate(timestamp)
+    }
 
-    const parent2 = getParent(parentTestText, 5);
-    console.log(parent2)
+    const parent = findParent(childTestText, 'parent', 6);
+    console.log(parent) // eslint-disable-line
 
-    const newElement = createElement('div', ['new-element'])
-    parent?.appendChild(newElement)
+    const newElement = createElement('p', ['new-element'])
+    newElement.textContent = 'Child appended'
+    parent?.appendChild(newElement) // eslint-disable-line
   }
 }
