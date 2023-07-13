@@ -1,11 +1,37 @@
-/**
- * Helper function to create a new element in the dom
- */
+import {
+  isIdSelector,
+  isClassSelector,
+  removeTrailingHashSign,
+  removeTrailingDot
+} from './class.helper.ts'
+
+// define error messages
+const errorMessages = {
+  createElement: {
+    elementTagNotValid: 'Element tag for creating the element is not valid',
+  },
+  hideElement: {
+    elementIsNull: 'Element to hide must not be null',
+  },
+  showElement: {
+    elementIsNull: 'Element to show must not be null',
+  },
+  findParent: {
+    elementIsNull: 'Child element could not be found',
+    selectorNotValid: 'The given selector is not valid, please check if it is an id or class selector'
+  },
+  getParent: {
+    elementIsNull: 'Child element in getParent could not be found'
+  }
+}
+
+// Helper function to create a new element in the dom
 export function createElement(
   elementTag: string,
   classes: Array<string> = []
 ): HTMLElement {
-  if (elementTag === '') throw new Error('elementTag for c')
+  if (elementTag === '')
+    throw new Error(errorMessages.createElement.elementTagNotValid)
 
   const element = document.createElement(elementTag)
   if (classes.length > 0) element.classList.add(...classes)
@@ -13,73 +39,84 @@ export function createElement(
   return element
 }
 
-/**
- * Helper function to hide an element in the dom
- */
+// Helper function to hide an element in the dom
 export function hideElement(
   element: HTMLElement | null,
   hiddenClass = ''
 ): any {
-  if (element === null) throw new Error('element to hide must not be null')
+  if (element === null) throw new Error(errorMessages.hideElement.elementIsNull)
   if (hiddenClass === '') return element.style.display === 'none'
 
   element.classList.add(hiddenClass)
 }
 
-/**
- * Helper function to show an element in the dom
- */
+// Helper function to show an element in the dom
 export function showElement(
   element: HTMLElement | null,
   showClass = '',
   displayStyle = 'block'
 ): any {
-  if (element === null) throw new Error('element to hide must not be null')
+  if (element === null) throw new Error(errorMessages.showElement.elementIsNull)
   if (showClass === '') return element.style.display === displayStyle
 
   element.classList.add(showClass)
 }
 
-/**
- * Helper function to find parent of given element by class name
- */
+// Helper function to find parent of an element by a given selector (either id or class)
 export function findParent(
   childElement: Element | null,
-  searchedClassName: string,
+  searchedSelector: string,
   iterationLimit = 5,
   currentIterationCount = 0
 ): HTMLElement | null {
-  if (childElement === null) throw new Error('Child element could not be found')
+  if (childElement === null) throw new Error(
+    errorMessages.findParent.elementIsNull
+  )
+
   if (iterationLimit <= currentIterationCount++) return null
 
   const parentElement = childElement.parentElement
-  const isSearchedElement = parentElement?.classList.contains(searchedClassName)
+  let isSearchedElement: boolean|undefined = false
+
+  if (!isClassSelector(searchedSelector) && !isIdSelector(searchedSelector))
+    throw new Error(errorMessages.findParent.selectorNotValid)
+
+  if (isClassSelector(searchedSelector)) {
+    const searchedClassName = removeTrailingDot(searchedSelector)
+    isSearchedElement = parentElement?.classList.contains(searchedClassName)
+  } else if (isIdSelector(searchedSelector)) {
+    const searchedIdName = removeTrailingHashSign(searchedSelector)
+    isSearchedElement = parentElement?.id === searchedIdName
+  }
 
   if (isSearchedElement || !parentElement) return parentElement
 
   return findParent(
     parentElement,
-    searchedClassName,
+    searchedSelector,
     iterationLimit,
     currentIterationCount
   )
 }
 
-/**
- * Helper to get a parent by going up in the document by a given number
- */
+// Helper function to get a parent by going up in the document by a given number of iterations
 export function getParent(
   childElement: Element | null,
-  iterationLimit = 5
+  iterationLimit = 5,
+  currentIterationCount = 0
 ): HTMLElement | null {
-  if (childElement === null) throw new Error('Child element could not be found')
-  const currentIterationCount = 0
-  let parentElement = null
+  if (childElement === null) throw new Error(
+    errorMessages.getParent.elementIsNull
+  )
 
-  while (currentIterationCount < iterationLimit) {
-    if (!childElement.parentElement) break
-    parentElement = childElement.parentElement
-  }
+  if (iterationLimit <= currentIterationCount++) return null
 
-  return parentElement
+  const parentElement = childElement.parentElement
+  if (currentIterationCount === iterationLimit) return parentElement
+
+  return getParent(
+    parentElement,
+    iterationLimit,
+    currentIterationCount
+  )
 }

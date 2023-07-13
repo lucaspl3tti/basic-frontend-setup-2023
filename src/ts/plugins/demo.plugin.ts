@@ -16,7 +16,7 @@ export default class DemoPlugin extends Plugin {
     super.initPlugin(htmlElement)
 
     console.log(this.el) // eslint-disable-line
-    // this.thisIsATest()
+    this.thisIsATest()
 
     return true
   }
@@ -29,8 +29,11 @@ export default class DemoPlugin extends Plugin {
       childTestText.textContent = formatDate(timestamp)
     }
 
-    const parent = findParent(childTestText, 'parent', 6);
+    const parent = findParent(childTestText, '.parent', 6);
     console.log(parent) // eslint-disable-line
+
+    const parent2 = getParent(childTestText, 3);
+    console.log(parent2) // eslint-disable-line
 
     const newElement = createElement('p', ['new-element'])
     newElement.textContent = 'Child appended'
