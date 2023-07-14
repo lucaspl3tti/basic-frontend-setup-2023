@@ -1,6 +1,3 @@
-import deepmerge from 'deepmerge'
-import Element from '../helper/element.helper.ts'
-
 interface Options {
     [key: string]: any
 }

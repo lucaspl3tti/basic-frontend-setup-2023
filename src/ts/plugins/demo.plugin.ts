@@ -48,7 +48,9 @@ export default class DemoPlugin extends Plugin {
   queryInitialElements() {
     const { selectors } = this.options
 
-    this.childTestText = this.el.querySelector(selectors.childTest) as HTMLElement
+    this.childTestText =
+      this.el.querySelector(selectors.childTest) as HTMLElement
+
     console.log(this.childTestText)
   }
 
