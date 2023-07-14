@@ -62,9 +62,11 @@ export default class PluginManager {
   ): void {
     let elements = document.querySelectorAll(pluginSelector)
 
-    elements.forEach((element) => {
+    elements.forEach((element: Element) => {
       const plugin = new PluginCallback()
-      plugin.initPlugin(element as HTMLElement)
+      plugin._el = element as HTMLElement
+
+      plugin.initPlugin()
     })
   }
 }

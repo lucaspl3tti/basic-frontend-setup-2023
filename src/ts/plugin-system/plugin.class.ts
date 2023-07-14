@@ -1,22 +1,24 @@
-// interface Options {
-//     [key: string]: any
-// }
+import deepmerge from 'deepmerge'
+import Element from '../helper/element.helper.ts'
+
+interface Options {
+    [key: string]: any
+}
 
 /**
  * Default plugin class on which every plugin will be build on
  */
 export default abstract class Plugin {
-  private _el: HTMLElement | undefined
+  public _el: HTMLElement | undefined
   private _name: string
-  // protected options: Options
+  public _options: Options
 
   /**
    * Plugin constructor method
    */
-  public constructor(name: string) {
-    this._name = name
-
-    // this.options = this._mergeOptions(options)
+  public constructor() {
+    this._name = this.constructor.name
+    this._options = this.constructor.options
   }
 
   /**
@@ -36,18 +38,21 @@ export default abstract class Plugin {
   }
 
   /**
-   * Initialize plugin
+   * Method to get plugin options
    */
-  initPlugin(htmlElement: HTMLElement): boolean {
-    this._el = htmlElement
+  get options(): Options {
+    if (this._options === undefined)
+      throw new Error(`Options for the plugin "${this._name}" are not defined`)
 
-    return true
+    return this._options
   }
 
   /**
-   * Merge plugin options to one object
+   * Method to initialize plugin
    */
-  // _mergeOptions(options: object) {
-  //     return { ...this.options, ...options }
-  // }
+  initPlugin() {
+    throw new Error(
+      `The "initPlugin" method for the plugin "${this._name}" is not defined.`
+    )
+  }
 }
