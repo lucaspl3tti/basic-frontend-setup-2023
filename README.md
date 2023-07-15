@@ -2,10 +2,12 @@
 My current personal frontend test and development environment. It is based on Vite.
 
 ## Tech Stack
-- JavaScript / TypeScript
+- ViteJS
+- TypeScript
 - ES6+
-- SASS / SCSS
-- Bootstrap 5.2 (Beta)
+- SCSS / SASS
+- Bootstrap 5.3
+- ESLint
 
 ## Installation Instructions
 1. Initialize a new repo from the [template repo](https://github.com/lucaspl3tti/basic-frontend-ide-2022)
