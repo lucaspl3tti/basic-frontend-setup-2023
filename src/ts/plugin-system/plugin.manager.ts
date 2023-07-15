@@ -1,12 +1,5 @@
 import Plugin from './plugin.class.ts'
-
-interface PluginQueueItem {
-  [index: string]: new () => Plugin
-}
-
-interface PluginQueue {
-  [index: string]: PluginQueueItem
-}
+import { PluginQueue} from '../interfaces/plugin.interface.ts'
 
 /**
  * Plugin Manager used to easily register and initialize plugins
@@ -62,9 +55,11 @@ export default class PluginManager {
   ): void {
     let elements = document.querySelectorAll(pluginSelector)
 
-    elements.forEach((element) => {
+    elements.forEach((element: Element) => {
       const plugin = new PluginCallback()
-      plugin.initPlugin(element as HTMLElement)
+      plugin._el = element as HTMLElement
+
+      plugin.initPlugin()
     })
   }
 }
