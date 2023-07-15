@@ -25,6 +25,6 @@ My current personal frontend test and development environment. It is based on Vi
 `npm run lint:js` run this command to lint over all js files
 
 ## TypeScript
-To use TypeScript you simply need to change your JavaScript files into TypeScript files and then also adjust source link for the "main.js/ts" file in the html code. Vite then automatically compiles it.
+This basic frontend setup uses TypeScript instead of standard JavaScript. Vite automatically compiles all TS files into JavaScript.
 
 ATTENTION: Vite doesn't do type checking. This is cause it is assuming that this is already done by your IDE Program (like Visual Studio Code e.g.) and your build process. So keep that in mind.
