@@ -1,7 +1,7 @@
 import Selector from "./selector.helper.ts"
 
 /**
- * Element helper functions
+ * ##### Element helper functions
  */
 export default class Element {
   /**

@@ -1,5 +1,5 @@
 /**
- * Selector helper functions
+ * ##### Selector helper functions
  */
 export default class Selector {
   /**

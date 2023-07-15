@@ -1,7 +1,7 @@
 import { Options } from '../interfaces/plugin.interface.ts'
 
 /**
- * Default plugin class on which every plugin will be build on
+ * ##### Default plugin class on which every plugin will be build on
  */
 export default abstract class Plugin {
   public _el: HTMLElement | undefined

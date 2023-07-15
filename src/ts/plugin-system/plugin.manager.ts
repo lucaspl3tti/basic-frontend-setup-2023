@@ -2,7 +2,7 @@ import Plugin from './plugin.class.ts'
 import { PluginQueue} from '../interfaces/plugin.interface.ts'
 
 /**
- * Plugin Manager used to easily register and initialize plugins
+ * ##### Plugin Manager used to easily register and initialize plugins
  */
 export default class PluginManager {
   private pluginQueue: PluginQueue
