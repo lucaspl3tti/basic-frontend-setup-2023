@@ -1,12 +1,5 @@
 import Plugin from './plugin.class.ts'
-
-interface PluginQueueItem {
-  [index: string]: new () => Plugin
-}
-
-interface PluginQueue {
-  [index: string]: PluginQueueItem
-}
+import { PluginQueue} from '../interfaces/plugin.interface.ts'
 
 /**
  * Plugin Manager used to easily register and initialize plugins

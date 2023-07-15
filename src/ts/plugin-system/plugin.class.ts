@@ -1,6 +1,4 @@
-interface Options {
-    [key: string]: any
-}
+import { Options } from '../interfaces/plugin.interface.ts'
 
 /**
  * Default plugin class on which every plugin will be build on

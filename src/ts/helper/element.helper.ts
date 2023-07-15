@@ -1,17 +1,20 @@
 import Selector from "./selector.helper.ts"
 
+/**
+ * Element helper functions
+ */
 export default class Element {
   /**
    * Define error messages for helper functions
    */
   static errorMessages = {
-    createElement: {
+    create: {
       elementTagNotValid: "Element tag for creating the element is not valid",
     },
-    hideElement: {
+    hide: {
       elementIsNull: "Element to hide must not be null",
     },
-    showElement: {
+    show: {
       elementIsNull: "Element to show must not be null",
     },
     findParent: {
@@ -37,8 +40,8 @@ export default class Element {
    * Helper function to create a new element in the dom
    */
   static create(elementTag: string, classes: Array<string> = []): HTMLElement {
-    if (elementTag === "")
-      throw new Error(this.errorMessages.createElement.elementTagNotValid)
+    if (elementTag === '')
+      throw new Error(this.errorMessages.create.elementTagNotValid)
 
     const element = document.createElement(elementTag)
     if (classes.length > 0) element.classList.add(...classes)
@@ -49,11 +52,9 @@ export default class Element {
   /**
    * Helper function to hide an element in the dom
    */
-  static hide(element: HTMLElement | null, hiddenClass = "") {
-    if (element === null)
-      throw new Error(this.errorMessages.hideElement.elementIsNull)
-
-    if (hiddenClass === "") return (element.style.display = "none")
+  static hide(element: HTMLElement | null, hiddenClass = '') {
+    if (element === null) throw new Error(this.errorMessages.hide.elementIsNull)
+    if (hiddenClass === '') return element.style.display = 'none'
 
     element.classList.add(hiddenClass)
   }
@@ -63,13 +64,11 @@ export default class Element {
    */
   static show(
     element: HTMLElement | null,
-    showClass = "",
-    displayStyle = "block"
+    showClass = '',
+    displayStyle = 'block'
   ) {
-    if (element === null)
-      throw new Error(this.errorMessages.showElement.elementIsNull)
-
-    if (showClass === "") return (element.style.display = displayStyle)
+    if (element === null) throw new Error(this.errorMessages.show.elementIsNull)
+    if (showClass === '') return element.style.display = displayStyle
 
     element.classList.add(showClass)
   }
@@ -95,8 +94,7 @@ export default class Element {
     if (
       !Selector.isClassSelector(searchedSelector) &&
       !Selector.isIdSelector(searchedSelector)
-    )
-      throw new Error(this.errorMessages.findParent.selectorNotValid)
+    ) throw new Error(this.errorMessages.findParent.selectorNotValid)
 
     if (Selector.isClassSelector(searchedSelector)) {
       const searchedClassName = Selector.removeTrailingDot(searchedSelector)

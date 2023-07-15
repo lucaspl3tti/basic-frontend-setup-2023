@@ -7,7 +7,7 @@ import Element from '../helper/element.helper.ts'
  * This is a demo ts plugin
  */
 export default class DemoPlugin extends Plugin {
-  // define global Variables
+  // define global variables
   private childTestText: HTMLElement | null
 
   // define plugin options
@@ -56,43 +56,75 @@ export default class DemoPlugin extends Plugin {
 
   // register all plugin events
   registerEvents() {
-    document.addEventListener('DOMContentLoaded', () => {
-      console.log('Dom content was loaded successfully')
-    })
+    window.onload = () => console.log('window loaded')
   }
 
+  /* eslint-disable */
   // example function to test helpers
   async examples() {
-    const { selectors, classes, settings } = this.options
+    this.isTouchDeviceExample()
+    this.formatDateExample()
+    this.isNodeExample()
+    const parent = this.findParentExample() as HTMLElement
+    this.getParentExample()
+    this.createElementExample(parent)
+    this.hideAndShowElementExample()
+  }
 
-    // Exapmle for isTouchDevice helper function
+  // Exapmle for isTouchDevice helper function
+  isTouchDeviceExample() {
     const isTouchDevice = Utilities.isTouchDevice()
-    console.log('current device is touchd device: ', isTouchDevice) // eslint-disable-line
+    console.log('current device is touch device: ', isTouchDevice)
+  }
 
-    // Example for formatDate helper function
+  // Example for formatDate helper function
+  formatDateExample() {
     if (this.childTestText !== null) {
-      const timestamp = this.childTestText.textContent || '2023-07-13'
+      const dateText = this.childTestText.textContent?.trim()
+      console.log(dateText)
+
+      const timestamp = dateText || '2023/07/13'
       this.childTestText.textContent = Formatting.formatDate(timestamp)
+
+      console.log(this.childTestText.textContent)
     }
+  }
 
-    // Example for isNode helper function
+  // Example for isNode helper function
+  isNodeExample() {
     const isNode = Element.isNode(this.childTestText)
-    console.log('element is node: ', isNode) // eslint-disable-line
+    console.log('element is node: ', isNode)
+  }
 
-    // Example for findParent by selector helper function
+  // Example for findParent by selector helper function
+  findParentExample(): HTMLElement|null {
+    const { selectors } = this.options
+
     const parent = Element.findParent(this.childTestText, selectors.parent, 6);
-    console.log('findParent parent element: ', parent) // eslint-disable-line
+    console.log('findParent parent element: ', parent)
 
-    // Example for getParent helper function
+    return parent
+  }
+
+  // Example for getParent helper function
+  getParentExample() {
     const parent2 = Element.getParent(this.childTestText, 3);
-    console.log('getParent parent element: ', parent2) // eslint-disable-line
+    console.log('getParent parent element: ', parent2)
+  }
 
-    // Example for element create helper fucntion
+  // Example for element create helper fucntion
+  createElementExample(parent: HTMLElement) {
+    const { classes } = this.options
+
     const newElement = Element.create('p', [classes.newElement])
     newElement.textContent = 'Child appended'
-    parent?.appendChild(newElement) // eslint-disable-line
+    parent?.appendChild(newElement)
+  }
 
-    // Example for element hide and show helper functions
+  // Example for element hide and show helper functions
+  async hideAndShowElementExample() {
+    const { selectors, settings } = this.options
+
     const button = this.el.querySelector(selectors.button) as HTMLElement
     console.log(button)
     Element.hide(button)
@@ -101,4 +133,5 @@ export default class DemoPlugin extends Plugin {
 
     Element.show(button)
   }
+  /* eslint-enable */
 }
