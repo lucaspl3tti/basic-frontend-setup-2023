@@ -1,8 +1,8 @@
 {
-  "name": "basic-frontend-ide",
+  "name": "basic-frontend-setup",
   "description": "A basic test and development environment for my frontend projects based on vite",
   "private": true,
-  "version": "2.0.0",
+  "version": "2.1.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
