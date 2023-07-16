@@ -1,4 +1,4 @@
-import { Options } from '../interfaces/plugin.interface.ts'
+import { PluginOptions } from '../interfaces/plugin.interface.ts'
 
 /**
  * ##### Default plugin class on which every plugin will be build on
@@ -6,7 +6,7 @@ import { Options } from '../interfaces/plugin.interface.ts'
 export default abstract class Plugin {
   public _el: HTMLElement | undefined
   private _name: string
-  public _options: Options
+  public _options: PluginOptions
 
   /**
    * Plugin constructor method
@@ -35,7 +35,7 @@ export default abstract class Plugin {
   /**
    * Method to get plugin options
    */
-  get options(): Options {
+  get options(): PluginOptions {
     if (this._options === undefined)
       throw new Error(`Options for the plugin "${this._name}" are not defined`)
 

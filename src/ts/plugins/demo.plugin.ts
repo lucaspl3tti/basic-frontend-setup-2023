@@ -1,14 +1,18 @@
 import Plugin from '../plugin-system/plugin.class.ts'
+import Array from '../helper/array.helper.ts'
+import DeviceDetection from '../helper/device-detection.helper.ts'
+import Dom from '../helper/dom.helper.ts'
 import Formatting from '../helper/formatting.helper.ts'
 import Utilities from '../helper/utilities.helper.ts'
-import Element from '../helper/element.helper.ts'
 
 /**
  * This is a demo ts plugin
  */
 export default class DemoPlugin extends Plugin {
-  // define global variables
-  private childTestText: HTMLElement | null
+  // define global variables with default values
+  private childTestText: HTMLElement | null = null
+  private dateElement: HTMLElement | null = null
+  private truncateString: HTMLElement | null = null
 
   // define plugin options
   static options = {
@@ -16,6 +20,8 @@ export default class DemoPlugin extends Plugin {
       childTest: '.parent-demo-text',
       parent: '.parent',
       button: '.btn',
+      date: '.date',
+      truncate: '.truncate',
     },
 
     classes: {
@@ -25,13 +31,6 @@ export default class DemoPlugin extends Plugin {
     settings: {
       waitingTimeMilliseconds: 2000
     }
-  }
-
-  constructor() {
-    super()
-
-    // set default values for all global variables
-    this.childTestText = null
   }
 
   // Initialize plugin
@@ -49,9 +48,20 @@ export default class DemoPlugin extends Plugin {
     const { selectors } = this.options
 
     this.childTestText =
-      this.el.querySelector(selectors.childTest) as HTMLElement
+      Dom.querySelector(selectors.childTest, this.el) as HTMLElement
 
-    console.log(this.childTestText)
+    this.dateElement = Dom.querySelector(selectors.date, this.el) as HTMLElement
+
+    this.truncateString =
+      Dom.querySelector(selectors.truncate, this.el) as HTMLElement
+
+    const allElements: HTMLElement[] = [
+      this.childTestText,
+      this.dateElement,
+      this.truncateString
+    ]
+
+    console.log('all initial elements: ', allElements)
   }
 
   // register all plugin events
@@ -62,45 +72,69 @@ export default class DemoPlugin extends Plugin {
   /* eslint-disable */
   // example function to test helpers
   async examples() {
-    this.isTouchDeviceExample()
+    this.deviceDetectionExamples()
     this.formatDateExample()
+    this.truncateStringExample()
     this.isNodeExample()
     const parent = this.findParentExample() as HTMLElement
     this.getParentExample()
     this.createElementExample(parent)
     this.hideAndShowElementExample()
+    this.getRandomNumberExample(parent)
+    this.arrayHelperExamples()
+    this.iterateExample()
   }
 
   // Exapmle for isTouchDevice helper function
-  isTouchDeviceExample() {
-    const isTouchDevice = Utilities.isTouchDevice()
-    console.log('current device is touch device: ', isTouchDevice)
+  deviceDetectionExamples() {
+    console.log('\n######## device detections examples ########')
+
+    const devices = DeviceDetection.devices()
+    console.log('devices: ', devices)
   }
 
   // Example for formatDate helper function
   formatDateExample() {
-    if (this.childTestText !== null) {
-      const dateText = this.childTestText.textContent?.trim()
-      console.log(dateText)
+    if (!this.dateElement) return
+    if (this.dateElement.textContent === '') return
+    console.log('\n######## formatDate example ########')
 
-      const timestamp = dateText || '2023/07/13'
-      this.childTestText.textContent = Formatting.formatDate(timestamp)
+    const dateText = this.dateElement.textContent?.trim()
 
-      console.log(this.childTestText.textContent)
-    }
+    const timestamp = dateText || '2023/07/13'
+    console.log('old timestamp: ', timestamp)
+
+    this.dateElement.textContent = Formatting.formatDate(timestamp)
+
+    console.log('new timestamp: ', this.dateElement.textContent)
+  }
+
+  truncateStringExample() {
+    if (!this.truncateString) return
+    console.log('\n######## truncateString example ########')
+
+    const truncateStringText = this.truncateString?.textContent
+
+    if (truncateStringText === null) return
+    this.truncateString.textContent = Formatting.truncateString(truncateStringText, 70)
   }
 
   // Example for isNode helper function
   isNodeExample() {
-    const isNode = Element.isNode(this.childTestText)
-    console.log('element is node: ', isNode)
+    console.log('\n######## isNode example ########')
+
+    const isNode = Dom.isNode(this.childTestText)
+    console.log('element childTestText is node: ', isNode)
   }
 
   // Example for findParent by selector helper function
   findParentExample(): HTMLElement|null {
-    const { selectors } = this.options
+    console.log('\n######## findParent example ########')
 
-    const parent = Element.findParent(this.childTestText, selectors.parent, 6);
+    const { selectors } = this.options
+    const child = this.childTestText as HTMLElement
+    const parent = Dom.findParent(child, selectors.parent, 6)
+
     console.log('findParent parent element: ', parent)
 
     return parent
@@ -108,30 +142,144 @@ export default class DemoPlugin extends Plugin {
 
   // Example for getParent helper function
   getParentExample() {
-    const parent2 = Element.getParent(this.childTestText, 3);
-    console.log('getParent parent element: ', parent2)
+    console.log('\n######## getParent example ########')
+
+    const child = this.childTestText as HTMLElement
+    const parent = Dom.getParent(child, 3);
+
+    console.log('getParent parent element: ', parent)
   }
 
   // Example for element create helper fucntion
   createElementExample(parent: HTMLElement) {
+    console.log('\n######## createElement example ########')
+
     const { classes } = this.options
 
-    const newElement = Element.create('p', [classes.newElement])
-    newElement.textContent = 'Child appended'
+    const newElement = Dom.createElement('p', {
+      'id': 'newElement',
+      'class': classes.newElement,
+      'text': 'Child appended',
+      'dataset': { test: true },
+      'data-hi': 'hello'
+    })
+
     parent?.appendChild(newElement)
+    console.log(newElement)
   }
 
   // Example for element hide and show helper functions
   async hideAndShowElementExample() {
+    console.log('\n######## hide and show element example ########')
+
     const { selectors, settings } = this.options
 
     const button = this.el.querySelector(selectors.button) as HTMLElement
-    console.log(button)
-    Element.hide(button)
+    console.log('button element: ', button)
+    Dom.hideElement(button)
 
     await Utilities.sleep(settings.waitingTimeMilliseconds)
 
-    Element.show(button)
+    Dom.showElement(button)
+  }
+
+  getRandomNumberExample(parent: HTMLElement) {
+    console.log('\n######## getRandomNumber example ########')
+
+    const randomNumberElement = Dom.createElement('p', {
+      'id': 'RandomNumber',
+      'class': 'random-number',
+    })
+
+    const randomNumber = Utilities.getRandomNumber(6, 200)
+    randomNumberElement.textContent = randomNumber.toString()
+
+    parent?.appendChild(randomNumberElement)
+    console.log(randomNumberElement.textContent)
+  }
+
+  arrayHelperExamples() {
+    console.log('\n######## array helper examples ########')
+
+    const demoArray = [1, 2, 3, 4, 5, 6]
+    console.log(demoArray)
+
+    // get first item in array
+    const firstItem = Array.first(demoArray)
+    console.log(firstItem)
+
+    // get first three items in array
+    const first3Items = Array.first(demoArray, 3)
+    console.log(first3Items)
+
+    // get last item in array
+    const lastItem = Array.last(demoArray)
+    console.log(lastItem)
+
+    // get last three items in array
+    const last3Items = Array.last(demoArray, 3)
+    console.log(last3Items)
+  }
+
+  iterateExample() {
+    console.log('\n######## iterate helper examples ########')
+
+    // define demo object
+    const object = {
+      test: 1,
+      lorem: 'ipsum'
+    }
+
+    // define demo array
+    const array = [1, 2, '3', 4, 5, '6']
+
+    // define demo map
+    const map = new Map()
+    map.set('a', 1)
+    map.set('b', 2)
+    map.set('c', 3)
+
+    // define demo nodeList
+    const nodeList = this.el.querySelectorAll('p')
+
+    // define demo form data
+    const formData = new FormData();
+    formData.append('key1', 'value1');
+    formData.append('key2', 'value2');
+
+    // iterate examples with all possibilities
+    // iterate over object
+    console.log('\n### iterate over object example')
+    Utilities.iterate(object, (item: any, key: any) => {
+      console.log(key)
+      console.log(item)
+    })
+
+    // iterate over array
+    console.log('\n### iterate over array example')
+    Utilities.iterate(array, (item: any) => {
+      console.log(item)
+    })
+
+    // iterate over map
+    console.log('\n### iterate over map example')
+    Utilities.iterate(map, (item: any, key: any) => {
+      console.log(key)
+      console.log(item)
+    })
+
+    // iterate over node list
+    console.log('\n### iterate over node list example')
+    Utilities.iterate(nodeList, (item: any) => {
+      console.log(item)
+    })
+
+    // iterate over form data
+    console.log('\n### iterate over form data example')
+    Utilities.iterate(formData, (item: any, key: any) => {
+      console.log(key)
+      console.log(item)
+    })
   }
   /* eslint-enable */
 }

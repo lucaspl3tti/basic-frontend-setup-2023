@@ -3,13 +3,19 @@
  */
 export default class Formatting {
   /**
-   * Helper function to format a given date string
+   * ## Helper function to format a given date string
    */
   static formatDate(value: string | Date, options = {}) {
-    if (value === null) throw new Error('Date value is null')
+    if (value === null || value === '')
+      throw new Error('Date value must not be null')
 
+    // create new date from given value
     const date = new Date(value)
-    const langCode = navigator.language
+
+    // get the current language from user
+    const languageCode = navigator.language
+
+    // set default options for language formatter and append special options
     const defaultOptions = {
       day: '2-digit',
       month: '2-digit',
@@ -17,25 +23,32 @@ export default class Formatting {
     }
     options = { ...defaultOptions, ...options, }
 
-    const dateTimeFormatter = new Intl.DateTimeFormat(langCode, options)
+    // create new formatter instance
+    const dateTimeFormatter = new Intl.DateTimeFormat(languageCode, options)
 
     return dateTimeFormatter.format(date)
   }
 
   /**
-   * Helper function to truncate string by a given amount of characters
+   * ## Helper function to truncate string to a given amount of characters
    */
   static  truncateString(
     string: string,
-    amountOfCharacters: number,
+    maxCharacters: number,
     useWordBoundary = true
   ): string {
-    if (string.length <= amountOfCharacters) return string
+    if (string.length <= maxCharacters) return string
 
-    const subString = string.slice(0, amountOfCharacters - 1)
+    // shorten string to given length
+    let newString = string.slice(0, maxCharacters - 1)
 
-    return (useWordBoundary
-        ? subString.slice(0, subString.lastIndexOf(' '))
-        : subString) + '&hellip;'
+    // if useWordBoundary is true shorten string to the last full word
+    if (useWordBoundary)
+      newString = newString.slice(0, newString.lastIndexOf(' '))
+
+    // append html entity for "..." to newString
+    newString = newString + '\u2026'
+
+    return newString
   }
 }

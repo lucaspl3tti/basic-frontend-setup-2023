@@ -3,9 +3,18 @@ import Plugin from '../plugin-system/plugin.class.ts'
 /**
  * ##### Define default plugin interfaces
  */
-// Interface for options Object
-export interface Options {
+// Interface for plugin options Object
+export interface PluginOptions {
   [key: string]: any;
+}
+
+// Interface for element create options
+export interface ElementCreateOptions {
+  id?: string
+  class?: string | string[]
+  text?: string
+  dataset?: Object
+  [key: string]: any
 }
 
 // Interface for items in the plugin queue
