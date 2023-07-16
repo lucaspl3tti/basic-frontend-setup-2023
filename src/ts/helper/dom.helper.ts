@@ -103,7 +103,7 @@ export default class Dom {
           element.textContent = optionValue
           break
         case 'dataset':
-          optionValue = value as Object
+          optionValue = value as object
           if (Object.keys(optionValue).length === 0 ) break
 
           console.log(Object.keys(optionValue).length)
@@ -203,7 +203,7 @@ export default class Dom {
     // get parent element from current iteration
     const parentElement = childElement.parentElement
 
-    // if last iteration was run or if parent element is null return parentElement
+    // if last iteration was run or if parent element is null return parent
     if (currentIterationCount === iterationLimit || !parentElement)
       return parentElement
 

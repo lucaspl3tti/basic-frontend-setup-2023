@@ -6,7 +6,7 @@ export default class Utilities {
    * ## Helper function to block scope for a given amount of time in ms and run
    * next set piece of code only after given time has passed
    */
-  static sleep(milliseconds: number): Promise<Function> {
+  static sleep(milliseconds: number): Promise<() => any> {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
   }
 

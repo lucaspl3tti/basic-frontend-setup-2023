@@ -13,7 +13,7 @@ export interface ElementCreateOptions {
   id?: string
   class?: string | string[]
   text?: string
-  dataset?: Object
+  dataset?: object
   [key: string]: any
 }
 
