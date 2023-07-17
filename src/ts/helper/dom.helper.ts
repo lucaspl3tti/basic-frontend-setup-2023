@@ -18,8 +18,8 @@ export default class Dom {
    * ## Helper function to query element by selector
    */
   static querySelector(
-    selector: string,
     parent: HTMLElement|Document = document,
+    selector: string,
     strict = true
   ): HTMLElement|Element|false|null {
     // when strict is enabled check if parent node is a valid element
@@ -45,8 +45,8 @@ export default class Dom {
    * NodeList into Array
    */
   static querySelectorAll(
+    parent: HTMLElement|Document = document,
     selector: string,
-    parent = document,
     strict = true
   ): Array<HTMLElement|Element|null>|false {
     // when strict is enabled check if parent node is a valid element

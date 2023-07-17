@@ -48,12 +48,12 @@ export default class DemoPlugin extends Plugin {
     const { selectors } = this.options
 
     this.childTestText =
-      Dom.querySelector(selectors.childTest, this.el) as HTMLElement
+      Dom.querySelector(this.el, selectors.childTest) as HTMLElement
 
-    this.dateElement = Dom.querySelector(selectors.date, this.el) as HTMLElement
+    this.dateElement = Dom.querySelector(this.el, selectors.date) as HTMLElement
 
     this.truncateString =
-      Dom.querySelector(selectors.truncate, this.el) as HTMLElement
+      Dom.querySelector(this.el, selectors.truncate) as HTMLElement
 
     const allElements: HTMLElement[] = [
       this.childTestText,
@@ -174,7 +174,7 @@ export default class DemoPlugin extends Plugin {
 
     const { selectors, settings } = this.options
 
-    const button = this.el.querySelector(selectors.button) as HTMLElement
+    const button = Dom.querySelector(this.el, selectors.button) as HTMLElement
     console.log('button element: ', button)
     Dom.hideElement(button)
 
@@ -240,7 +240,7 @@ export default class DemoPlugin extends Plugin {
     map.set('c', 3)
 
     // define demo nodeList
-    const nodeList = this.el.querySelectorAll('p')
+    const nodeList = Dom.querySelectorAll(this.el, 'p')
 
     // define demo form data
     const formData = new FormData();
@@ -251,34 +251,34 @@ export default class DemoPlugin extends Plugin {
     // iterate over object
     console.log('\n### iterate over object example')
     Utilities.iterate(object, (item: any, key: any) => {
-      console.log(key)
-      console.log(item)
+      console.log('key: ', key)
+      console.log('item: ', item)
     })
 
     // iterate over array
     console.log('\n### iterate over array example')
     Utilities.iterate(array, (item: any) => {
-      console.log(item)
+      console.log('item: ', item)
     })
 
     // iterate over map
     console.log('\n### iterate over map example')
     Utilities.iterate(map, (item: any, key: any) => {
-      console.log(key)
-      console.log(item)
+      console.log('key: ', key)
+      console.log('item: ', item)
     })
 
     // iterate over node list
     console.log('\n### iterate over node list example')
     Utilities.iterate(nodeList, (item: any) => {
-      console.log(item)
+      console.log('item: ', item)
     })
 
     // iterate over form data
     console.log('\n### iterate over form data example')
     Utilities.iterate(formData, (item: any, key: any) => {
-      console.log(key)
-      console.log(item)
+      console.log('key: ', key)
+      console.log('item: ', item)
     })
   }
   /* eslint-enable */
