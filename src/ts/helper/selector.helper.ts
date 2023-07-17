@@ -3,7 +3,7 @@
  */
 export default class Selector {
   /**
-   * Helper function to check if a given selector is an Id
+   * ## Helper function to check if a given selector is an Id
    */
   static isIdSelector(string: string): boolean {
     if (string.charAt(0) !== '#') return false
@@ -11,7 +11,7 @@ export default class Selector {
   }
 
   /**
-   * Helper function to check if a given selector is a class
+   * ## Helper function to check if a given selector is a class
    */
   static isClassSelector(string: string) {
     if (string.charAt(0) !== '.') return false
@@ -19,17 +19,17 @@ export default class Selector {
   }
 
   /**
-   * Remove the trailing hash sign from an id selector
+   * ## Remove the trailing hash sign from an id selector
    */
-  static removeTrailingHashSign(string: string) {
+  static removeIdTrailingSymbol(string: string) {
     if (string.charAt(0) !== '#') return string
     return string.substring(1)
   }
 
   /**
-   * Remove the trailing dot from a class selector
+   * ## Remove the trailing dot from a class selector
    */
-  static removeTrailingDot(string: string) {
+  static removeClassTrailingSymbol(string: string) {
     if (string.charAt(0) !== '.') return string
     return string.substring(1)
   }
