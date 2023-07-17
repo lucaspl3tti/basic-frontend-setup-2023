@@ -158,7 +158,7 @@ export default class DemoPlugin extends Plugin {
 
     const newElement = Dom.createElement('p', {
       'id': 'newElement',
-      'class': classes.newElement,
+      'classes': classes.newElement,
       'text': 'Child appended',
       'dataset': { test: true },
       'data-hi': 'hello'

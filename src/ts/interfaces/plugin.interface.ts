@@ -11,7 +11,7 @@ export interface PluginOptions {
 // Interface for element create options
 export interface ElementCreateOptions {
   id?: string
-  class?: string | string[]
+  classes?: string | string[]
   text?: string
   dataset?: object
   [key: string]: any

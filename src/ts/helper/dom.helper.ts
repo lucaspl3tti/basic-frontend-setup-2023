@@ -24,7 +24,7 @@ export default class Dom {
   ): HTMLElement|Element|false|null {
     // when strict is enabled check if parent node is a valid element
     if (strict && !this.isNode(parent))
-      throw new Error('The parent node is not a valid HTML Node!')
+      throw new Error('The parent element is not a valid HTML Node!')
 
     /**
      * get element with searched selector by using querySelector if no elements
@@ -51,7 +51,7 @@ export default class Dom {
   ): Array<HTMLElement|Element|null>|false {
     // when strict is enabled check if parent node is a valid element
     if (strict && !this.isNode(parent))
-      throw new Error('The parent node is not a valid HTML Node!')
+      throw new Error('The parent element is not a valid HTML Node!')
 
     // get all elements with searched selector by using querySelectorAll
     const nodeList = parent.querySelectorAll(selector)
@@ -75,7 +75,7 @@ export default class Dom {
     if (type === '')
       throw new Error('Element type for new element must not be empty')
 
-    // create new element of given time
+    // create new element of given type
     const element = document.createElement(type)
 
     // Loop over options obejct
@@ -90,10 +90,16 @@ export default class Dom {
 
           element.id = optionValue
           break
-        case 'class':
-          optionValue = value as string
-          if (optionValue.length === 0) break
+        case 'classes':
+          if (value.length === 0) break
 
+          if (value instanceof Array) {
+            optionValue = value
+            element.classList.add(...optionValue)
+            break
+          }
+
+          optionValue = value as string
           element.classList.add(optionValue)
           break
         case 'text':
