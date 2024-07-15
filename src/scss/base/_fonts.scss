@@ -1,30 +1,63 @@
-// normal font: Sora
+// stylelint-disable
+// default font: Sora
 @font-face {
   font-family: Sora;
   font-weight: 400;
-  src: url('./assets/fonts/Sora-Regular.ttf');
+  src: url('./assets/fonts/Sora/Sora-Regular.ttf');
 }
 
 @font-face {
   font-family: Sora;
   font-weight: 300;
-  src: url('./assets/fonts/Sora-Light.ttf');
+  src: url('./assets/fonts/Sora/Sora-Light.ttf');
 }
 
 @font-face {
   font-family: Sora;
   font-weight: 500;
-  src: url('./assets/fonts/Sora-Medium.ttf');
+  src: url('./assets/fonts/Sora/Sora-Medium.ttf');
 }
 
 @font-face {
   font-family: Sora;
   font-weight: 600;
-  src: url('./assets/fonts/Sora-SemiBold.ttf');
+  src: url('./assets/fonts/Sora/Sora-SemiBold.ttf');
 }
 
 @font-face {
   font-family: Sora;
   font-weight: 700;
-  src: url('./assets/fonts/Sora-Bold.ttf');
+  src: url('./assets/fonts/Sora/Sora-Bold.ttf');
 }
+
+// code font: SourceCodePro
+@font-face {
+  font-weight: 400;
+  font-family: SourceCodePro;
+  src: url('./assets/fonts/SourceCodePro/SourceCodePro-Regular.ttf');
+}
+
+@font-face {
+  font-weight: 300;
+  font-family: SourceCodePro;
+  src: url('./assets/fonts/SourceCodePro/SourceCodePro-Light.ttf');
+}
+
+@font-face {
+  font-weight: 500;
+  font-family: SourceCodePro;
+  src: url('./assets/fonts/SourceCodePro/SourceCodePro-Medium.ttf');
+}
+
+@font-face {
+  font-weight: 600;
+  font-family: SourceCodePro;
+  src: url('./assets/fonts/SourceCodePro/SourceCodePro-SemiBold.ttf');
+}
+
+@font-face {
+  font-weight: 700;
+  font-family: SourceCodePro;
+  src: url('./assets/fonts/SourceCodePro/SourceCodePro-Bold.ttf');
+}
+// stylelint-enable

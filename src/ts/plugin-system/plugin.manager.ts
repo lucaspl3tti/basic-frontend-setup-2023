@@ -1,5 +1,5 @@
+import { PluginQueue } from '@ts/interfaces/plugin.interface.ts'
 import Plugin from './plugin.class.ts'
-import { PluginQueue} from '../interfaces/plugin.interface.ts'
 
 /**
  * ##### Plugin Manager used to easily register and initialize plugins
@@ -15,33 +15,49 @@ export default class PluginManager {
     this.pluginQueue = {}
     this.documentLoaded = false
 
-    document.addEventListener('DOMContentLoaded', () => this.initPlugins())
+    document.addEventListener('DOMContentLoaded', () => {
+      this.initializePlugins()
+    })
   }
 
   /**
    * Function to register a given plugin
    */
-  registerPlugin(PluginCallback: new () => Plugin, selector: string): void {
-    if (this.documentLoaded) return
+  registerPlugin(
+    PluginCallback: new (element: HTMLElement, name: string) => Plugin,
+    pluginName: string,
+    selector: string,
+  ): void {
+    if (this.documentLoaded) {
+      return
+    }
 
-    if (this.pluginQueue[PluginCallback.name] === undefined)
-      this.pluginQueue[PluginCallback.name] = {}
+    if (this.pluginQueue[pluginName] === undefined) {
+      this.pluginQueue[pluginName] = {}
+    }
 
-    this.pluginQueue[PluginCallback.name][selector] = PluginCallback
+    this.pluginQueue[pluginName][selector] = PluginCallback
   }
 
   /**
    * Function to initialize all registered plugins
    */
-  public initPlugins(): void {
-    if (this.documentLoaded) return
+  public initializePlugins(): void {
+    if (this.documentLoaded) {
+      return
+    }
+
     this.documentLoaded = true
 
-    for (let pluginName in this.pluginQueue) {
-      let pluginQueueItem = this.pluginQueue[pluginName]
+    for (const pluginName in this.pluginQueue) {
+      const pluginQueueItem = this.pluginQueue[pluginName]
 
-      for (let pluginSelector in pluginQueueItem) {
-        this.initPlugin(pluginSelector, pluginQueueItem[pluginSelector])
+      for (const pluginSelector in pluginQueueItem) {
+        this.initializePlugin(
+          pluginSelector,
+          pluginName,
+          pluginQueueItem[pluginSelector],
+        )
       }
     }
   }
@@ -49,17 +65,18 @@ export default class PluginManager {
   /**
    * Function to initialize one plugin
    */
-  public initPlugin(
+  public initializePlugin(
     pluginSelector: string,
-    PluginCallback: new () => Plugin,
+    pluginName: string,
+    PluginCallback: new (element: HTMLElement, name: string) => Plugin,
   ): void {
-    let elements = document.querySelectorAll(pluginSelector)
+    const elements = document.querySelectorAll(pluginSelector)
 
     elements.forEach((element: Element) => {
-      const plugin = new PluginCallback()
-      plugin._el = element as HTMLElement
+      const pluginEl = element as HTMLElement
+      const plugin = new PluginCallback(pluginEl, pluginName)
 
-      plugin.initPlugin()
+      plugin.initialize()
     })
   }
 }

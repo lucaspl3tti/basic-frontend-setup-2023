@@ -1,28 +1,29 @@
 /**
  * ##### Selector helper functions
  */
-export default class Selector {
+export class Selector {
   /**
    * ## Helper function to check if a given selector is an Id
    */
   static isIdSelector(string: string): boolean {
-    if (string.charAt(0) !== '#') return false
-    return true
+    return string.charAt(0) === '#'
   }
 
   /**
    * ## Helper function to check if a given selector is a class
    */
   static isClassSelector(string: string) {
-    if (string.charAt(0) !== '.') return false
-    return true
+    return string.charAt(0) === '.'
   }
 
   /**
    * ## Remove the trailing hash sign from an id selector
    */
   static removeIdTrailingSymbol(string: string) {
-    if (string.charAt(0) !== '#') return string
+    if (!this.isIdSelector(string)) {
+      return string
+    }
+
     return string.substring(1)
   }
 
@@ -30,7 +31,10 @@ export default class Selector {
    * ## Remove the trailing dot from a class selector
    */
   static removeClassTrailingSymbol(string: string) {
-    if (string.charAt(0) !== '.') return string
+    if (!this.isClassSelector(string)) {
+      return string
+    }
+
     return string.substring(1)
   }
 }

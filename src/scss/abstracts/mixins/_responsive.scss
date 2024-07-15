@@ -32,6 +32,12 @@
   }
 }
 
+@mixin tablet-only {
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
 @mixin tablet-portrait-up {
   @media (min-width: $breakpoint-lg) {
     @content;
@@ -40,6 +46,12 @@
 
 @mixin tablet-portrait-down {
   @media (max-width: $breakpoint-lg) {
+    @content;
+  }
+}
+
+@mixin tablet-portrait-only {
+  @media (min-width: $breakpoint-lg) and (max-width: $breakpoint-xl) {
     @content;
   }
 }
@@ -56,14 +68,38 @@
   }
 }
 
+@mixin desktop-only {
+  @media (min-width: $breakpoint-xl) and (max-width: $breakpoint-xxl) {
+    @content;
+  }
+}
+
 @mixin desktop-large-up {
   @media (min-width: $breakpoint-xxl) {
     @content;
   }
 }
 
+@mixin desktop-large-down {
+  @media (max-width: $breakpoint-xxl) {
+    @content;
+  }
+}
+
+@mixin desktop-large-only {
+  @media (min-width: $breakpoint-xxl) and (max-width: $breakpoint-4k) {
+    @content;
+  }
+}
+
 @mixin desktop-4k-up {
   @media (min-width: $breakpoint-4k) {
+    @content;
+  }
+}
+
+@mixin desktop-4k-down {
+  @media (max-width: $breakpoint-4k) {
     @content;
   }
 }

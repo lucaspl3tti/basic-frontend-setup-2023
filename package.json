@@ -2,14 +2,17 @@
   "name": "basic-frontend-setup",
   "description": "A basic test and development environment for my frontend projects based on vite",
   "private": true,
-  "version": "2.1.1",
+  "version": "2024.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint:scss": "sass-lint -v -q",
+    "lint:scss": "npx stylelint src/scss/**/*.scss",
+    "lintfix:scss": "npx stylelint src/scss/**/*.scss --fix",
     "lint:js": "eslint --ext .ts src/ts/**/*.ts",
-    "lint:js-fix": "eslint --ext .ts src/ts/**/*.ts --fix"
+    "lintfix:js": "eslint --ext .ts src/ts/**/*.ts --fix",
+    "lint": "npm run lint:js && npm run lint:scss",
+    "lintfix": "npm run lintfix:js && npm run lintfix:scss"
   },
   "keywords": [
     "javascript",
@@ -25,16 +28,24 @@
     "@types/bootstrap": "^4.3.1",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
-    "bootstrap": "^5.3.0",
     "eslint": "^8.19.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.26.0",
     "sass": "^1.53.0",
-    "sass-lint": "^1.13.1",
+    "stylelint": "^16.5.0",
+    "stylelint-config-standard": "^36.0.0",
+    "stylelint-config-standard-scss": "^13.1.0",
+    "stylelint-order": "^6.0.4",
     "typescript": "^5.1.6",
+    "unplugin-auto-import": "^0.17.6",
     "vite": "^2.9.9"
   },
   "dependencies": {
-    "deepmerge": "^4.3.1"
+    "bootstrap": "^5.3.0",
+    "bootstrap-icons": "^1.11.3",
+    "deepmerge": "^4.3.1",
+    "highlight.js": "^11.9.0",
+    "material-symbols": "^0.17.2",
+    "path": "^0.12.7"
   }
 }

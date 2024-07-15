@@ -23,24 +23,45 @@
   }
 }
 
-//Placeholders
-//Usage:
-//@include placeholder;
+// Placeholder
 @mixin placeholder {
   // sass-lint:disable no-vendor-prefixes
   ::-webkit-input-placeholder {
-    @content
+    @content;
   }
 
   :-moz-placeholder {
-    @content
+    @content;
   }
 
   ::-moz-placeholder {
-    @content
+    @content;
   }
 
   :-ms-input-placeholder {
-    @content
+    @content;
   }
+}
+
+// truncate multiline
+@mixin truncate-multiline(
+  $line-height: 1.2em,
+  $line-count: 2,
+  $background-color: $color-white
+) {
+  max-width: 95%;
+  height: $line-height * $line-count;
+  margin-right: -1em;
+  padding-right: 1em;
+  overflow: hidden;
+  text-align: justify;
+  line-height: $line-height;
+  line-clamp: $line-count;
+  text-overflow: ellipsis;
+
+  /* stylelint-disable */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $line-count;
+  /* stylelint-enable */
 }

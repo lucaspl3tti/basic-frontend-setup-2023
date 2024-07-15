@@ -1,0 +1,11 @@
+{
+  "globals": {
+    "ArrayAccess": true,
+    "DeviceDetection": true,
+    "Dom": true,
+    "Formatting": true,
+    "Selector": true,
+    "Utilities": true,
+    "bootstrap": true
+  }
+}

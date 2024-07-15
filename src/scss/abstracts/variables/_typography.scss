@@ -1,6 +1,6 @@
 // define fonts
 $font-body: 'Sora', sans-serif;
-$font-code: 'monospace';
+$font-code: 'SourceCodePro', monospace;
 
 // define font-sizes desktop
 $font-size-h1: 52px;
@@ -23,7 +23,11 @@ $font-size-small-mobile: 16px;
 $font-size-smaller-mobile: 14px;
 
 // define font-weights
+$font-weight-extra-light: 200;
 $font-weight-light: 300;
 $font-weight-normal: 400;
 $font-weight-medium: 500;
+$font-weight-semibold: 600;
 $font-weight-bold: 700;
+$font-weight-extra-bold: 800;
+$font-weight-black: 900;

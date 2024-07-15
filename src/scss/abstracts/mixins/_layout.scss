@@ -67,7 +67,7 @@ $space-base: 4px;
 }
 
 // positioning
-@mixin abs-position($top: 0, $right: auto, $bottom: auto, $left: 0) {
+@mixin absolute-position($top: 0, $right: auto, $bottom: auto, $left: 0) {
   position: absolute;
   top: $top;
   right: $right;

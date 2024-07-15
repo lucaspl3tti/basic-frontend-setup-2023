@@ -1,0 +1,47 @@
+.hamburger {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 400ms;
+  user-select: none;
+
+  &__line {
+    transition:
+      stroke-dasharray 400ms,
+      stroke-dashoffset 400ms;
+    fill: none;
+    stroke: $color-black;
+    stroke-width: 5.5;
+    stroke-linecap: round;
+
+    &--top {
+      stroke-dasharray: 40 172;
+      stroke-dashoffset: -132px;
+    }
+
+    &--middle {
+      stroke-dasharray: 40 111;
+      stroke-dashoffset: -71px;
+    }
+
+    &--bottom {
+      stroke-dasharray: 40 172;
+      stroke-dashoffset: -132px;
+    }
+  }
+}
+
+.navbar-toggler.collapsed {
+  .hamburger__line {
+    &--top {
+      stroke-dashoffset: 0;
+    }
+
+    &--middle {
+      stroke-dashoffset: 0;
+    }
+
+    &--bottom {
+      stroke-dashoffset: 0;
+    }
+  }
+}

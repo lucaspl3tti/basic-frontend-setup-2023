@@ -1,9 +1,12 @@
+@use 'sass:color';
+
 // import scss color variables
 @import 'abstracts/variables';
 
 // import vendor files
 @import 'vendor/bootstrap/custom';
-@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 
 // import base styling
 @import 'base/base';
@@ -11,4 +14,8 @@
 @import 'base/print';
 
 // import component styling
+@import 'components/app-loader';
 @import 'components/button';
+@import 'components/code-block';
+@import 'components/hamburger-icon';
+@import 'components/return-top';

@@ -19,7 +19,7 @@ export interface ElementCreateOptions {
 
 // Interface for items in the plugin queue
 export interface PluginQueueItem {
-  [index: string]: new () => Plugin
+  [index: string]: new (element: HTMLElement, name: string) => Plugin
 }
 
 // Interface for plugin queue

@@ -1,9 +1,4 @@
-import Plugin from '../plugin-system/plugin.class.ts'
-import Array from '../helper/array.helper.ts'
-import DeviceDetection from '../helper/device-detection.helper.ts'
-import Dom from '../helper/dom.helper.ts'
-import Formatting from '../helper/formatting.helper.ts'
-import Utilities from '../helper/utilities.helper.ts'
+import Plugin from '@ts/plugin-system/plugin.class.ts'
 
 /**
  * This is a demo ts plugin
@@ -29,12 +24,12 @@ export default class DemoPlugin extends Plugin {
     },
 
     settings: {
-      waitingTimeMilliseconds: 2000
-    }
+      waitingTimeMilliseconds: 2000,
+    },
   }
 
   // Initialize plugin
-  initPlugin() {
+  initialize() {
     console.log(this.el) // eslint-disable-line
     console.log(this.options) // eslint-disable-line
 
@@ -48,25 +43,25 @@ export default class DemoPlugin extends Plugin {
     const { selectors } = this.options
 
     this.childTestText =
-      Dom.querySelector(this.el, selectors.childTest) as HTMLElement
+      Dom.get(this.el, selectors.childTest) as HTMLElement
 
-    this.dateElement = Dom.querySelector(this.el, selectors.date) as HTMLElement
+    this.dateElement = Dom.get(this.el, selectors.date) as HTMLElement
 
     this.truncateString =
-      Dom.querySelector(this.el, selectors.truncate) as HTMLElement
+      Dom.get(this.el, selectors.truncate) as HTMLElement
 
     const allElements: HTMLElement[] = [
       this.childTestText,
       this.dateElement,
-      this.truncateString
+      this.truncateString,
     ]
 
-    console.log('all initial elements: ', allElements)
+    console.log('all initial elements: ', allElements) // eslint-disable-line
   }
 
   // register all plugin events
   registerEvents() {
-    window.onload = () => console.log('window loaded')
+    window.onload = () => console.log('window loaded') // eslint-disable-line
   }
 
   /* eslint-disable */
@@ -174,7 +169,7 @@ export default class DemoPlugin extends Plugin {
 
     const { selectors, settings } = this.options
 
-    const button = Dom.querySelector(this.el, selectors.button) as HTMLElement
+    const button = Dom.get(this.el, selectors.button) as HTMLElement
     console.log('button element: ', button)
     Dom.hideElement(button)
 
@@ -205,19 +200,19 @@ export default class DemoPlugin extends Plugin {
     console.log(demoArray)
 
     // get first item in array
-    const firstItem = Array.first(demoArray)
+    const firstItem = ArrayAccess.first(demoArray)
     console.log(firstItem)
 
     // get first three items in array
-    const first3Items = Array.first(demoArray, 3)
+    const first3Items = ArrayAccess.first(demoArray, 3)
     console.log(first3Items)
 
     // get last item in array
-    const lastItem = Array.last(demoArray)
+    const lastItem = ArrayAccess.last(demoArray)
     console.log(lastItem)
 
     // get last three items in array
-    const last3Items = Array.last(demoArray, 3)
+    const last3Items = ArrayAccess.last(demoArray, 3)
     console.log(last3Items)
   }
 
@@ -240,7 +235,7 @@ export default class DemoPlugin extends Plugin {
     map.set('c', 3)
 
     // define demo nodeList
-    const nodeList = Dom.querySelectorAll(this.el, 'p')
+    const nodeList = Dom.getAll(this.el, 'p')
 
     // define demo form data
     const formData = new FormData();

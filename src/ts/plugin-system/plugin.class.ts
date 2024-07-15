@@ -1,4 +1,6 @@
-import { PluginOptions } from '../interfaces/plugin.interface.ts'
+import { PluginOptions } from '@ts/interfaces/plugin.interface.ts'
+
+type PluginConstructor = Function & { options: { [key: string]: any } } // eslint-disable-line
 
 /**
  * ##### Default plugin class on which every plugin will be build on
@@ -11,9 +13,27 @@ export default abstract class Plugin {
   /**
    * Plugin constructor method
    */
-  public constructor() {
-    this._name = this.constructor.name
-    this._options = this.constructor.options
+  public constructor(element: HTMLElement, name: string) {
+    const pluginConstructor = this.constructor as PluginConstructor
+
+    this._name = name
+    this._el = element
+
+    const options = pluginConstructor.options || {}
+    this._options = this._mergeOptions(options)
+  }
+
+  _mergeOptions(options: PluginOptions): PluginOptions {
+    const dashedPluginName = Formatting.toDashCase(this._name)
+    const dataAttributeOptions =
+      this.el.getAttribute(`data-${dashedPluginName}-options`) || '{}'
+
+    const merge = {
+      ...options,
+      ...JSON.parse(dataAttributeOptions),
+    }
+
+    return merge
   }
 
   /**
@@ -27,7 +47,9 @@ export default abstract class Plugin {
    * Method to get plugin element
    */
   get el(): HTMLElement {
-    if (this._el === undefined) throw new Error('Element is not defined')
+    if (this._el === undefined) {
+      throw new Error('Element is not defined')
+    }
 
     return this._el
   }
@@ -36,8 +58,9 @@ export default abstract class Plugin {
    * Method to get plugin options
    */
   get options(): PluginOptions {
-    if (this._options === undefined)
+    if (this._options === undefined) {
       throw new Error(`Options for the plugin "${this._name}" are not defined`)
+    }
 
     return this._options
   }
@@ -45,9 +68,9 @@ export default abstract class Plugin {
   /**
    * Method to initialize plugin
    */
-  initPlugin() {
+  initialize() {
     throw new Error(
-      `The "initPlugin" method for the plugin "${this._name}" is not defined.`
+      `The "initialize" method for the plugin "${this._name}" is not defined.` // eslint-disable-line
     )
   }
 }
